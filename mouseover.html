@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+	<style type="text/css">
+		table{font-family:"Arial";font-size:2em;border-collapse:collapse;}
+		td{text-align:center;padding:0.5em 0.6em;color: #333;border:2px solid #666;cursor:pointer;}
+		tr.active td, col.active{background-color:#ddd;}
+		tr td:hover, td.active{color: #f00;background-color:#ffc;}
+	</style>
+	<body>
+	<table id="MyTable" onclick=x()>
+		<colgroup><col /><col /><col /><col /><col /></colgroup>
+		<tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+		<tr><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+		<tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td></tr>
+		<tr><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
+		<tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td></tr> 
+	</table>
+	<p id="output"></p>
+	<script type="text/javascript">
+		var out = document.getElementById("output");
+		var t = document.getElementById("MyTable");
+		var tC = t.getElementsByTagName("col");
+		t.addEventListener("mouseover",f);
+		t.addEventListener("mouseout",f);
+		
+		function f(e){
+			var c = e.target 
+			if (c.nodeName == "TD"){
+				c.parentElement.className=(tC[c.cellIndex].className=(e.type == "mouseover")?"active":"");
+				out.textContent = e.type == "mouseover"?"You have selected: "+c.textContent:"";
+			}
+		}
+		
+		function x(){
+			var cells = t.getElementsByTagName("TD");
+			if (cells){
+				for(var i = 0; i < cells.length; i++){
+					cells[i].className = cells[i].className === "active" ? "" : "active";
+				}
+			}
+		}
+	</script>
+	</body>
+</html>
